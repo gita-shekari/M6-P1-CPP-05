@@ -6,7 +6,7 @@
 /*   By: gshekari <gshekari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 14:23:07 by gshekari          #+#    #+#             */
-/*   Updated: 2026/07/01 21:52:31 by gshekari         ###   ########.fr       */
+/*   Updated: 2026/07/02 17:15:48 by gshekari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,18 @@ void Bureaucrat::decrementGrade()
 	if(grade >= 150)
 		throw GradeTooLowException();
 	grade++;
+}
+void Bureaucrat::signForm(Form &form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->getName() << " signed " << form.getName() << "." << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << this->getName() << " couldn’t sign " << form.getName() << ", because " <<  e.what() << std::endl;
+	}
 }
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
 {
