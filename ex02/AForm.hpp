@@ -6,7 +6,7 @@
 /*   By: gshekari <gshekari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 15:51:41 by gshekari          #+#    #+#             */
-/*   Updated: 2026/07/03 16:18:30 by gshekari         ###   ########.fr       */
+/*   Updated: 2026/07/06 21:00:45 by gshekari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ class AForm
 		bool get_is_signed() const;
 		int getGradeToSign() const;
 		int getGradeToExecute() const;
-		virtual void beSigned(const Bureaucrat &bureaucrat) = 0;
-
+		void beSigned(Bureaucrat const &bureaucrat);
+		void execute(Bureaucrat const &executor) const;
+		virtual void executeAction() const = 0;
 		class GradeTooHighException : public std::exception
 		{
 			public:
@@ -44,6 +45,16 @@ class AForm
 		class GradeTooLowException : public std::exception
 		{
 			public:
+				const char* what() const throw();
+		};
+		class FormIsNotSigned : public std::exception
+		{
+			public :
+				const char* what() const throw();
+		};
+		class GradeOfExecutorIsTooLow : public std::exception
+		{
+			public :
 				const char* what() const throw();
 		};
 

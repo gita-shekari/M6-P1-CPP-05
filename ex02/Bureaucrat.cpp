@@ -6,7 +6,7 @@
 /*   By: gshekari <gshekari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 14:23:07 by gshekari          #+#    #+#             */
-/*   Updated: 2026/07/02 17:15:48 by gshekari         ###   ########.fr       */
+/*   Updated: 2026/07/06 20:59:39 by gshekari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void Bureaucrat::decrementGrade()
 		throw GradeTooLowException();
 	grade++;
 }
-void Bureaucrat::signForm(Form &form)
+void Bureaucrat::signForm(AForm  &form) const
 {
 	try
 	{
@@ -73,6 +73,21 @@ void Bureaucrat::signForm(Form &form)
 	{
 		std::cerr << this->getName() << " couldn’t sign " << form.getName() << ", because " <<  e.what() << std::endl;
 	}
+}
+void Bureaucrat::executeForm(AForm const &form) const
+{
+	try
+	{
+		{
+			form.execute(*this);
+			std::cout << this->getName() << " excuted " << form.getName() << "." << std::endl;
+		}
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << this->getName() << "  couldn’t execute " << form.getName() << ", because " << e.what() << std::endl;
+	}
+
 }
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
 {
