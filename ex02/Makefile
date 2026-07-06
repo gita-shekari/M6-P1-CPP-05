@@ -1,5 +1,5 @@
 NAME     := run
-SRCS     := main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp
+SRCS     := main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 OBJS     := $(SRCS:.cpp=.o)
 
 all: $(NAME)
